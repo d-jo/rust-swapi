@@ -3,10 +3,10 @@
 #[derive(Debug, Deserialize)]
 pub enum StarWarsType {
     People(super::People),
-    Films,
-    Starships,
-    Vehicles,
-    Species,
+    Films(super::Film),
+    Starships(super::Starships),
+    Vehicles(super::Vehicles),
+    Species(super::Species),
     Planets(super::Planet),
 }
 
