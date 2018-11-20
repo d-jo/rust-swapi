@@ -1,5 +1,6 @@
 extern crate swapi;
 
 fn main() {
-    swapi::types::people::query_people("2");
+    println!("Requesting a person");
+    println!("data response is {:?}", swapi::types::people::query_people("10"));
 }

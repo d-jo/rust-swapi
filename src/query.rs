@@ -10,19 +10,16 @@ pub enum StarWarsType {
     Planets(super::Planet),
 }
 
-pub fn api_query(endpoint: &str) {
+pub fn api_query(endpoint: &str) -> Result<reqwest::Response, String> {
     // Base URL for all API requests
     let base_url: String = "https://swapi.co/api".to_owned();
     // Concatenate endpoint onto base_url
     let query_url: &str = &(base_url + &endpoint);
 
-    let mut response = reqwest::get(query_url).expect("Failed request!");
+    let response = reqwest::get(query_url).expect("Failed request!");
 
     match response.status().is_success() {
-        false => println!("{} is an invalid request!", query_url),
-        true => {
-            let data = response.json::<super::People>();
-            println!("{:#?}", data);
-        }
+        false => Err(format!("{} is an invalid request!", query_url)),
+        true => Ok(response),
     }
 }
